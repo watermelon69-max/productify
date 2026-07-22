@@ -5,6 +5,8 @@ import cors from "cors"
 
 const app = express()
 
+
+
 app.use(cors({ origin: ENV.FRONTEND_URL }))
 app.use(clerkMiddleware()); //auth objext will be attached to the request object 
 app.use(express.json())// parses JSON request bodies 
