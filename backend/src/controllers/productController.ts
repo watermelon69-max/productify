@@ -39,7 +39,7 @@ export const getMyProdcuts = async (req: Request, res: Response) => {
         if (!userId) return res.status(401).json({ error: "Unauthorized" })
 
         const products = await queries.getProductByUserId(userId)
-        res.json(200).json(products);
+        res.status(200).json(products);
 
     } catch (error) {
         console.log("Error getting user product ", error);
