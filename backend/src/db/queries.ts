@@ -91,6 +91,16 @@ export const updateProduct = async (id: string, data: Partial<NewProduct>) => {
     return product;
 };
 
+export const deleteProduct = async (id: string) => {
+    const existingProduct = await getProductById(id);
+    if (!existingProduct) {
+        throw new Error(`Product with id ${id} not found`);
+    }
+
+    const [product] = await db.delete(products).where(eq(products.id, id)).returning();
+    return product;
+};
+
 
 //comment queries
 export const createComment = async (data: NewComment) => {
