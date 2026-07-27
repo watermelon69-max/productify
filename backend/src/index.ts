@@ -15,15 +15,22 @@ const app = express()
 
 
 
-app.use(cors({ origin: ENV.FRONTEND_URL }))
+app.use(cors({ origin: ENV.FRONTEND_URL, credentials: true }))
 app.use(clerkMiddleware()); //auth objext will be attached to the request object 
 app.use(express.json())// parses JSON request bodies 
 app.use(express.urlencoded({ extended: true }))
 
 
-app.use("/", (req, res) => {
-    res.send({ success: true })
-})
+app.get("/api/health", (req, res) => {
+    res.json({
+        message: "Welcome to Productify API - Powered by PostgreSQL, Drizzle ORM & Clerk Auth",
+        endpoints: {
+            users: "/api/users",
+            products: "/api/products",
+            comments: "/api/comments",
+        },
+    });
+});
 
 app.use("/api/users", userRoutes);
 app.use("/api/products", productRoutes);
