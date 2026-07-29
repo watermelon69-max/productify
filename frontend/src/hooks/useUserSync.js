@@ -8,7 +8,7 @@ const useUserSync = () => {
   const { isSignedIn } = useAuth();
   const { user } = useUser();
 
-  const lastSyncUserId = useRef(null);
+  const lastSyncedUserId = useRef(null);
 
   const {
     mutate: syncUserMutation,
